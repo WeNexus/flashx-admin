@@ -28,6 +28,7 @@ const Layout = ({ children }: DashboardLayoutProps) => {
       { name: "Dashboard", url: "/", icon: HomeIcon },
       { name: "Subscribers", url: "/subscribers", icon: PackageIcon },
       { name: "Campaigns", url: "/campaigns", icon: OrderIcon },
+      { name: "Announcement Bar", url: "/announce-bar", icon: OrderIcon },
       {
         name: "Settings",
         url: "/settings",

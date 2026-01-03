@@ -9,6 +9,7 @@ import ActivityLogs from "./components/userLogs";
 import Settings from "./components/settings";
 import Integrations from "./components/integrations";
 import ReviewLogs from "./components/review-log";
+import AnnounceBar from "./components/announcebar";
 
 export const router = createHashRouter([
   {},
@@ -31,6 +32,14 @@ export const router = createHashRouter([
     ),
   },
   {
+    path: "announce-bar",
+    element: (
+      <Layout>
+        <AnnounceBar />
+      </Layout>
+    ),
+  },
+  {
     path: "subscribers/:storeId",
     element: (
       <Layout>
@@ -41,11 +50,11 @@ export const router = createHashRouter([
   {
     path: "subscribers/:storeId/:campaignId",
     element: (
-        <Layout>
-          <div>
-            <h1>This is campaign page by campaign id</h1>
-          </div>
-        </Layout>
+      <Layout>
+        <div>
+          <h1>This is campaign page by campaign id</h1>
+        </div>
+      </Layout>
     ),
   },
   {
