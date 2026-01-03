@@ -44,6 +44,7 @@ const Subscriber = () => {
 
 
     const [campaigns, setCampaigns] = useState<CampaignListType>([] as CampaignListType);
+    const [jobs, setJobs] = useState<any>([]);
 
     console.log("STORE:", loading,);
 
@@ -54,7 +55,9 @@ const Subscriber = () => {
             .then((res) => res.json())
             .then((res) => {
                 console.log(res);
-                setCampaigns(res.data ?? []);
+                debugger
+                setCampaigns(filters != 'jobs' ? res.data ?? [] : []);
+               setJobs(filters == 'jobs' ? res.data ?? [] : []);
                 setPagination(res.pagination);
                 setStore(res.store);
                 // setOrders(res.orders);
@@ -123,7 +126,7 @@ const Subscriber = () => {
                 </div>
             </div>
             <br/>
-            <CampaignsLists campaigns={campaigns ?? []} pagination={pagination} setFilters={setFilters}/>
+            <CampaignsLists campaigns={campaigns ?? []} pagination={pagination} setFilters={setFilters} jobs={jobs}/>
             {/*<SubscriberOrderList*/}
             {/*  orders={orders}*/}
             {/*  pagination={pagination}*/}
