@@ -24,7 +24,7 @@ const AnnounceBar = () => {
   const [page, setPage] = useState<number>(1);
   const [filters, setFilters] = useState<string>("all");
   const [queryValue, setQueryValue] = useState("");
-  const [reFetch, setReFetch] = useState<boolean>(false);
+  const [reFetch] = useState<boolean>(false);
 
   const searchTerm = useDebounce(queryValue, 700);
 
