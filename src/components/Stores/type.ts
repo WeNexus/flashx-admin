@@ -45,7 +45,7 @@ export interface IStats {
   totalInstalled:number,
   currentInstalled:number,
   totalUninstalled:number,
-  totalCampaigns:number,
-  totalActiveCampaigns:number,
-  totalScheduleCampaigns:number,
+  totalStandard:number,
+  totalPlus:number,
+  totalEnterprise:number,
 }

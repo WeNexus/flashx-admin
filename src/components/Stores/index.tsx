@@ -1,5 +1,5 @@
-import SubscribersCart from "./subscripber-card";
-import SubscriberList from "./subscriber-list";
+import StoresCarts from "./store-card.tsx";
+import StoresList from "./stores-list.tsx";
 import useDebounce from "../../hooks/debounce";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { BASE_URL } from "../../config";
@@ -9,12 +9,12 @@ const initialStats: IStats = {
   currentInstalled: 0,
   totalInstalled: 0,
   totalUninstalled: 0,
-  totalCampaigns: 0,
-  totalScheduleCampaigns: 0,
-  totalActiveCampaigns: 0,
+  totalStandard: 0,
+  totalPlus: 0,
+  totalEnterprise: 0,
 };
 
-const Subscribers = () => {
+const Stores = () => {
   const [data, setSubscribers] = useState<StoreRecordList>([]);
   const [pagination, setPagination] = useState<any>({});
   const [loading, setLoading] = useState<boolean>(true);
@@ -111,9 +111,9 @@ const Subscribers = () => {
 
   return (
     <div className="p-6">
-      <SubscribersCart stats={stats} />
+      <StoresCarts stats={stats} />
       <br />
-      <SubscriberList
+      <StoresList
         stores={data ?? []}
         pagination={pagination}
         loading={loading}
@@ -128,4 +128,4 @@ const Subscribers = () => {
   );
 };
 
-export default Subscribers;
+export default Stores;

@@ -6,15 +6,13 @@ import type {CampaignListType} from "./type";
 import {CampaignsLists} from "./campaigns-list.tsx";
 import {Button} from "@shopify/polaris";
 import {ArrowLeftIcon} from "@shopify/polaris-icons";
-import CampaignsDetailsCart from "./subscriber-details-card.tsx";
+import CampaignsDetailsCart from "./stores-details-card.tsx";
 import AppControlCard from "./app-control-card.tsx";
 
-const Subscriber = () => {
+const Store = () => {
     const {storeId} = useParams<{ storeId: string }>();
-    // @ts-ignore
     const [reFetch, setReFetch] = useState<boolean>(false);
-    //
-    // @ts-ignore
+    
     const [stats, setStats] = useState<{
         totalCampaigns: number,
         totalActiveCampaigns: number,
@@ -94,7 +92,7 @@ const Subscriber = () => {
                     <Button
                         icon={ArrowLeftIcon}
                         onClick={() =>
-                            (location.href = "/flashx-logs/#/subscribers/")
+                            (location.href = "/flashx-logs/#/stores/")
                         }
                     ></Button>{" "}
                     <span className="text-2xl font-bold">
@@ -141,4 +139,4 @@ const Subscriber = () => {
     );
 };
 
-export default Subscriber;
+export default Store;

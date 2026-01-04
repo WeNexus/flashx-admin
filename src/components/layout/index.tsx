@@ -26,7 +26,7 @@ const Layout = ({ children }: DashboardLayoutProps) => {
   const navItems: INavItem[] = useMemo(() => {
     return [
       { name: "Dashboard", url: "/", icon: HomeIcon },
-      { name: "Subscribers", url: "/subscribers", icon: PackageIcon },
+      { name: "Stores", url: "/stores", icon: PackageIcon },
       { name: "Campaigns", url: "/campaigns", icon: OrderIcon },
       { name: "Announcement Bar", url: "/announce-bar", icon: OrderIcon },
       {
@@ -47,12 +47,12 @@ const Layout = ({ children }: DashboardLayoutProps) => {
         icon: OrderIcon,
       },
     ].map((item) => {
-      const isClaimsRoute = /^\/subscribers\/[^/]+$/.test(location.pathname);
+      const isClaimsRoute = /^\/stores\/[^/]+$/.test(location.pathname);
       return {
         ...item,
         active:
           item.url === location.pathname ||
-          (item.name === "Subscribers" && isClaimsRoute),
+          (item.name === "stores" && isClaimsRoute),
       };
     });
   }, [location.pathname]);

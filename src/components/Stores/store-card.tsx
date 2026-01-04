@@ -7,7 +7,7 @@ import { useMemo, type ReactNode } from "react";
 
 import type { IStats } from "./type";
 
-const SubscribersCart = ({ stats }: { stats: IStats }) => {
+const StoresCarts = ({ stats }: { stats: IStats }) => {
   const dashboardCartItems: {
     title: string;
     value: number | string;
@@ -36,9 +36,10 @@ const SubscribersCart = ({ stats }: { stats: IStats }) => {
           </div>
         ),
       },
+
       {
-        title: "Total Campaigns",
-        value: stats.totalCampaigns, //stats?.totalInactive ?? 0,
+        title: "Total Standard subscriptions",
+        value: stats.totalStandard, //stats?.totalInactive ?? 0,
         bg: "#ffd2e9",
         icon: (
           <div className="bg-gray-500 p-3 rounded text-white">
@@ -47,8 +48,8 @@ const SubscribersCart = ({ stats }: { stats: IStats }) => {
         ),
       },
       {
-        title: "Total Active Campaigns",
-        value: stats.totalActiveCampaigns, // stats?.trial ?? 0,
+        title: "Total Plus subscriptions",
+        value: stats.totalPlus, // stats?.trial ?? 0,
         bg: "#b4fed2",
         icon: (
           <div className="bg-gray-500 p-3 rounded text-white">
@@ -57,8 +58,8 @@ const SubscribersCart = ({ stats }: { stats: IStats }) => {
         ),
       },
       {
-        title: "Total Scheduled Campaigns",
-        value: stats.totalScheduleCampaigns, // stats?.trial ?? 0,
+        title: "Total Enterprise subscriptions",
+        value: stats.totalEnterprise, // stats?.trial ?? 0,
         bg: "#d5ebff",
         icon: (
             <div className="bg-gray-500  p-3 rounded text-white">
@@ -98,4 +99,4 @@ const SubscribersCart = ({ stats }: { stats: IStats }) => {
   );
 };
 
-export default SubscribersCart;
+export default StoresCarts;

@@ -83,18 +83,18 @@ export const CampaignsLists = ({campaigns, setFilters, pricingBannerOff = false,
         content: item,
         id: String(index),
     }));
-// @ts-ignore
-    const defaultFormatter = useMemo(
-        () =>
-            new Intl.DateTimeFormat('en', {
-                day: 'numeric',
-                year: '2-digit',
-                month: '2-digit',
-                hour: 'numeric',
-                minute: 'numeric',
-            }),
-        []
-    );
+// // @ts-ignore
+//     const defaultFormatter = useMemo(
+//         () =>
+//             new Intl.DateTimeFormat('en', {
+//                 day: 'numeric',
+//                 year: '2-digit',
+//                 month: '2-digit',
+//                 hour: 'numeric',
+//                 minute: 'numeric',
+//             }),
+//         []
+//     );
 
     console.log('campaigns', campaigns);
 
@@ -124,7 +124,7 @@ export const CampaignsLists = ({campaigns, setFilters, pricingBannerOff = false,
         }
 
         return formatters;
-    }, [campaigns]);
+    }, [campaigns, selected]);
 
     const handleTabChange = useCallback((selectedIndex: number) => {
 

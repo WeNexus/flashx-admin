@@ -19,13 +19,13 @@ const createCampaign =
 
 import {useCallback, useMemo, useState} from "react";
 
-import type {CampaignListType} from "../subscriber/type.ts";
+import type {CampaignListType} from "../store/type.ts";
 import {PlusIcon} from "@shopify/polaris-icons";
-import SpinnerComponent from "../subscriber/utitls/spinner-component.tsx";
+import SpinnerComponent from "../store/utitls/spinner-component.tsx";
 import {
     formatNumber,
     getCampaignStatusBadgeProps,
-} from "../subscriber/utitls/utils.ts";
+} from "../store/utitls/utils.ts";
 
 export const CampaignsListsForAdmin = ({
                                            campaigns,
@@ -55,15 +55,15 @@ export const CampaignsListsForAdmin = ({
 
     const {mode, setMode} = useSetIndexFiltersMode();
 
-    // @ts-ignore
-    const [itemStrings, setItemStrings] = useState([
+
+    const itemStrings = [
         "All",
         "Active",
         "Inactive",
         "Schedule",
         "Draft",
         "Pending",
-    ]);
+    ];
 
     // Map selected tab to status value
     const statusMap: Record<any, any> = {
@@ -98,18 +98,18 @@ export const CampaignsListsForAdmin = ({
         content: item,
         id: String(index),
     }));
-    // @ts-ignore
-    const defaultFormatter = useMemo(
-        () =>
-            new Intl.DateTimeFormat("en", {
-                day: "numeric",
-                year: "2-digit",
-                month: "2-digit",
-                hour: "numeric",
-                minute: "numeric",
-            }),
-        [],
-    );
+
+    // const defaultFormatter = useMemo(
+    //     () =>
+    //         new Intl.DateTimeFormat("en", {
+    //             day: "numeric",
+    //             year: "2-digit",
+    //             month: "2-digit",
+    //             hour: "numeric",
+    //             minute: "numeric",
+    //         }),
+    //     [],
+    // );
 
     console.log("campaigns", campaigns);
 
@@ -156,7 +156,7 @@ export const CampaignsListsForAdmin = ({
             setFilters(statusFromUser.toLowerCase());
             setSelected(selectedIndex);
         }
-    }, []);
+    }, [itemStrings.length, setFilters, statusMap]);
 
     const resourceName = useMemo(
         () => ({
@@ -251,7 +251,7 @@ export const CampaignsListsForAdmin = ({
                     {/*        <SpinnerComponent size={'large'}/>*/}
                     {/*    </div>*/}
                     {/*)}*/}
-                    {campaigns.length == 0 && !loading ? undefined : (
+                    {/*{campaigns.length == 0 && !loading ? undefined : (*/}
                         <IndexFilters
                             queryValue=""
                             queryPlaceholder="Search Campaigns"
@@ -272,7 +272,7 @@ export const CampaignsListsForAdmin = ({
                                 throw new Error("Function not implemented.");
                             }}
                         />
-                    )}
+                    {/*// )}*/}
 
                     <IndexTable
                         loading={loading}
@@ -357,9 +357,8 @@ export const CampaignsListsForAdmin = ({
                             // const { collections, collectionLength } =
                             //     getCollectionTitle(campaign);
 
-                            // @ts-ignore
-                            // @ts-ignore
-                            // @ts-ignore
+
+
                             return (
                                 <IndexTable.Row
                                     // selected={selectedResources.includes(campaign.id.toString())}
@@ -412,19 +411,15 @@ export const CampaignsListsForAdmin = ({
                                     <IndexTable.Cell className="padding12">
                                         <div className="parent flex items-center">
                                             <Button
-                                                // @ts-ignore
-                                                onClick={(event: React.MouseEvent<HTMLElement>) => {
-                                                    event.stopPropagation();
+                                                onClick={() => {
                                                     if (window !== undefined) {
                                                         const base = window.location.origin;
-                                                        return (window.location.href = `${base}/flashx-logs/#/subscribers/${campaign?.Store?.domain}`);
-                                                        // (
-                                                        //     `${base}/flashx-logs/#/subscribers/${campaign?.Store?.domain}`,
-                                                        // );
+                                                        window.location.href = `${base}/flashx-admin/#/stores/${campaign?.Store?.domain}`;
                                                     }
                                                 }}
                                             >
-                                                {/*@ts-ignore*/}
+                                                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                                                {/*@ts-expect-error*/}
                                                 <StoreStatusDisplay store={campaign?.Store}/>
                                             </Button>
                                         </div>
@@ -565,7 +560,7 @@ export const CampaignsListsForAdmin = ({
     );
 };
 
-const StoreStatusDisplay: React.FC<any> = ({ store }):any => {
+const StoreStatusDisplay = ({store}: {store: any}):any => {
     return (
         <span>
             {/* Provide a default name if store or name is missing */}

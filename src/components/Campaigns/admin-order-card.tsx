@@ -1,14 +1,12 @@
 import { Icon, Text } from "@shopify/polaris";
 import {
-  BlogIcon,
-  OrderIcon,
+  ClockIcon, MegaphoneFilledIcon,
   StatusActiveIcon,
-  XCircleIcon,
 } from "@shopify/polaris-icons";
 import { type ReactNode } from "react";
 
 const AdminOrderCard = ({ stats }: { stats: any }) => {
-  const { totalOrder, protectedOrder, unprotectedOrder, claimed } = stats || {};
+
 
   const dashboardCartItems: {
     title: string;
@@ -16,48 +14,58 @@ const AdminOrderCard = ({ stats }: { stats: any }) => {
     bg?: string;
     icon: ReactNode;
   }[] = [
-    // TODO: get all order filter [channel= online store and sku= wenexus-shipping-protection] to get actual order
+
     {
-      title: "Total Order",
-      value: totalOrder ?? 0,
-      bg: "#ffffff",
+      title: "Total Campaigns",
+      value: stats.totalCampaigns ?? 0, //stats?.totalInactive ?? 0,
+      bg: "#F3F4F6",
       icon: (
-        <div className="bg-blue-400 p-3 rounded text-white">
-          <Icon source={OrderIcon} />
-        </div>
-      ),
-      // icon:<img width='70' src='https://shipguard.nyc3.cdn.digitaloceanspaces.com/ShipGuard%20Widget%20Assets/assets/order-image.png' alt='order-image'/>
-    },
-    {
-      title: "Protected Order",
-      value: protectedOrder ?? 0,
-      bg: "#cff1cf",
-      icon: (
-        <div className="bg-green-500 p-3 rounded text-white">
-          <Icon source={StatusActiveIcon} />
-        </div>
+          <div className="bg-gray-500 p-3 rounded text-white">
+            <Icon source={MegaphoneFilledIcon} />
+          </div>
       ),
     },
     {
-      title: "Unprotected Order",
-      value: unprotectedOrder ?? 0,
-      bg: "#ffd2e9",
+      title: "Total Active Campaigns",
+      value: stats.totalActiveCampaigns  ?? 0, // stats?.trial ?? 0,
+      bg: "#DCFCE7",
       icon: (
-        <div className="bg-red-500 p-3 rounded text-white">
-          <Icon source={XCircleIcon} />
-        </div>
+          <div className="bg-gray-500 p-3 rounded text-white">
+            <Icon source={StatusActiveIcon} />
+          </div>
+      ),
+    },
+
+    {
+      title: "Total Scheduled Campaigns",
+      value: stats.totalScheduleCampaigns  ?? 0, // stats?.trial ?? 0,
+      bg: "#DBEAFE",
+      icon: (
+          <div className="bg-gray-500  p-3 rounded text-white">
+            <Icon source={ClockIcon} />
+          </div>
       ),
     },
     {
-      title: "Claimed",
-      value: claimed ?? 0,
-      bg: "#ffcccc",
+      title: "Total Draft Campaigns",
+      value: stats.totalDraftCampaigns  ?? 0, // stats?.trial ?? 0,
+      bg: "#F1F5F9",
       icon: (
-        <div className="bg-gray-500 p-3 rounded text-white">
-          <Icon source={BlogIcon} />
-        </div>
+          <div className="bg-gray-500  p-3 rounded text-white">
+            <Icon source={ClockIcon} />
+          </div>
       ),
     },
+    {
+      title: "Total Stuck or Cancelled Campaigns",
+      value: stats.totalOthersCampaigns  ?? 0, // stats?.trial ?? 0,
+      bg: "#FEF3C7",
+      icon: (
+          <div className="bg-gray-500  p-3 rounded text-white">
+            <Icon source={ClockIcon} />
+          </div>
+      ),
+    }
   ];
   return (
     <>

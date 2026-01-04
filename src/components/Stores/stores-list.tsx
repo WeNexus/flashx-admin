@@ -9,33 +9,29 @@ import {
     Text,
 } from "@shopify/polaris";
 import type {TabProps} from "@shopify/polaris";
-import {useState, useMemo, useEffect} from "react";
+import {useState, useMemo, useEffect, type Dispatch, type SetStateAction} from "react";
 import type {StoreRecordList} from "./type";
 import {Link} from "react-router";
 
-const SubscriberList = ({
-                            stores,
-                            loading,
-                            pagination,
-                            page = 1,
-                            setPage = () => {
-                            },
-                            setFilters = () => {
-                            },
-                            setQueryValue = () => {
-                            },
-                            queryValue,
-                        }: {
+const StoresList = ({
+                             stores,
+                             loading,
+                             pagination,
+                             page = 1,
+                             setPage ,
+                             setFilters ,
+                             setQueryValue ,
+                             queryValue,
+                         }: {
     stores: StoreRecordList;
     loading: boolean;
     pagination: Record<string, any>;
     page: number;
-    setPage: Function;
-    setFilters: Function;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-    setQueryValue: Function;
+    setPage: Dispatch<SetStateAction<number>>;
+    setFilters: Dispatch<SetStateAction<any>>;
+    setQueryValue: Dispatch<SetStateAction<any>>;
 
-    setReFetch: Function;
+    setReFetch: Dispatch<SetStateAction<any>>;
     queryValue: string;
 }) => {
     const [itemStrings] = useState(["All", "Active", "Inactive"]);
@@ -59,14 +55,13 @@ const SubscriberList = ({
         } else {
             setFilters("inactive");
         }
-    }, [selected]);
+    }, [selected, setFilters]);
 
 
     const storesStructure = useMemo(() => {
         return stores?.map((store) => {
-            // @ts-ignore
 
-            const norm = s => (s ?? "").toUpperCase();
+            const norm = (s:string) => (s ?? "").toUpperCase();
             const campaigns = store?.Campaigns ?? [];
 
             const totalCampaigns = campaigns.length;
@@ -100,6 +95,7 @@ const SubscriberList = ({
                 // ),
                 appReview: store.appReview,
                 createdAt: new Date(store.createdAt).toDateString(),
+                uninstalledAt: store.uninstalledAt ? new Date(store.uninstalledAt).toDateString() : 'N/A',
             };
         });
     }, [stores]);
@@ -121,6 +117,7 @@ const SubscriberList = ({
                 storePlan,
                 appReview,
                 createdAt,
+                uninstalledAt,
             },
             index
         ) => (
@@ -141,10 +138,11 @@ const SubscriberList = ({
                 <IndexTable.Cell>{totalCampaigns}</IndexTable.Cell>
                 <IndexTable.Cell>{activeCampaign}</IndexTable.Cell>
                 <IndexTable.Cell>{inactiveCampaign}</IndexTable.Cell>
-                <IndexTable.Cell>N/A</IndexTable.Cell>
+                {/*<IndexTable.Cell>N/A</IndexTable.Cell>*/}
                 <IndexTable.Cell>{storePlan}</IndexTable.Cell>
                 <IndexTable.Cell>{country}</IndexTable.Cell>
                 <IndexTable.Cell>{createdAt}</IndexTable.Cell>
+                <IndexTable.Cell>{uninstalledAt}</IndexTable.Cell>
                 <IndexTable.Cell>
                     <div
                     >
@@ -205,10 +203,11 @@ const SubscriberList = ({
                     {title: "Total Campaigns"},
                     {title: "Active Campaigns"},
                     {title: "Inactive Campaigns"},
-                    {title: "Secured Revenue"},
+                    // {title: "Secured Revenue"},
                     {title: "Shopify Status"},
                     {title: "Country"},
                     {title: "Installed At"},
+                    {title:"Uninstalled At"},
                     {title: "Review"},
                 ]}
                 pagination={{
@@ -240,4 +239,4 @@ const SubscriberList = ({
     );
 };
 
-export default SubscriberList;
+export default StoresList;

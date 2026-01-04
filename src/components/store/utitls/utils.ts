@@ -120,7 +120,7 @@ export function getCampaignStatusBadgeProps(
                             ? 'attention'
                             : status === 'Price_updating' ||
                             status === 'Tags_updating' ||
-                            'Pending_activation'
+                            status === 'Pending_activation'
                                 ? 'info'
                                 : undefined;
 

@@ -6,13 +6,12 @@ import type {IActiveDates} from "../layout/type";
 import {default30Days} from "../../utils/default30Days";
 import {BASE_URL} from "../../config";
 import useDebounce from "../../hooks/debounce";
-import type {CampaignListType} from "../subscriber/type.ts";
+import type {CampaignListType} from "../store/type.ts";
 import {CampaignsListsForAdmin} from "./campaigns-list.tsx";
 
 const Orders = () => {
     // const [orders, setOrders] = useState<any>([]);
     const [stats, setStats] = useState<any>({});
-    // @ts-ignore
     const [loading, setLoading] = useState<boolean>(true);
     const [pagination, setPagination] = useState<any>({});
     const [page, setPage] = useState<number>(1);
