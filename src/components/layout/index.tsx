@@ -2,10 +2,14 @@ import { useMemo, useState } from "react";
 import type { INavItem } from "./type";
 import { Navigate, useLocation } from "react-router";
 import {
-  HomeIcon,
+  ChartStackedIcon,
+  ChartVerticalFilledIcon,
+  ClockIcon,
+  DiscountIcon,
   OrderIcon,
   PackageIcon,
   SettingsIcon,
+  StoreIcon,
 } from "@shopify/polaris-icons";
 import Sidebar from "./sidebar";
 import TopBar from "./topbar";
@@ -25,10 +29,20 @@ const Layout = ({ children }: DashboardLayoutProps) => {
 
   const navItems: INavItem[] = useMemo(() => {
     return [
-      { name: "Dashboard", url: "/", icon: HomeIcon },
+      { name: "Dashboard", url: "/", icon: ChartVerticalFilledIcon },
       { name: "Stores", url: "/stores", icon: PackageIcon },
-      { name: "Campaigns", url: "/campaigns", icon: OrderIcon },
-      { name: "Announcement Bar", url: "/announce-bar", icon: OrderIcon },
+      { name: "Subscribers", url: "/subscribers", icon: StoreIcon },
+      { name: "Campaigns", url: "/campaigns", icon: DiscountIcon },
+      {
+        name: "Announcement Bar",
+        url: "/announce-bar",
+        icon: ChartStackedIcon,
+      },
+      {
+        name: "Timer For Products",
+        url: "/timer-for-products",
+        icon: ClockIcon,
+      },
       {
         name: "Settings",
         url: "/settings",
