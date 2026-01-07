@@ -161,7 +161,7 @@ const AnnounceBar = () => {
         <IndexFilters
           sortOptions={[]}
           queryValue={queryValue}
-          queryPlaceholder="Searching in Store Name"
+          queryPlaceholder="Searching in Name, Store Name and Campaign"
           onQueryChange={(value: string) => setQueryValue(value)}
           onQueryClear={() => setQueryValue("")}
           tabs={tabs}
