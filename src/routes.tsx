@@ -10,6 +10,7 @@ import Settings from "./components/settings";
 import Integrations from "./components/integrations";
 import ReviewLogs from "./components/review-log";
 import AnnounceBar from "./components/announcebar";
+import Subscriptions from "./components/subscriptions";
 
 export const router = createHashRouter([
   {},
@@ -28,6 +29,14 @@ export const router = createHashRouter([
     element: (
       <Layout>
         <Stores />
+      </Layout>
+    ),
+  },
+  {
+    path: "subscriptions",
+    element: (
+      <Layout>
+        <Subscriptions />
       </Layout>
     ),
   },

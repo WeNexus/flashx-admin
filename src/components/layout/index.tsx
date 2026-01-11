@@ -6,6 +6,7 @@ import {
   OrderIcon,
   PackageIcon,
   SettingsIcon,
+  ReceiptIcon,
 } from "@shopify/polaris-icons";
 import Sidebar from "./sidebar";
 import TopBar from "./topbar";
@@ -16,10 +17,6 @@ interface DashboardLayoutProps {
 }
 const Layout = ({ children }: DashboardLayoutProps) => {
   const isLoggedIn = useAuth();
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />;
-  }
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
 
@@ -27,6 +24,7 @@ const Layout = ({ children }: DashboardLayoutProps) => {
     return [
       { name: "Dashboard", url: "/", icon: HomeIcon },
       { name: "Stores", url: "/stores", icon: PackageIcon },
+      { name: "Subscriptions", url: "/subscriptions", icon: ReceiptIcon },
       { name: "Campaigns", url: "/campaigns", icon: OrderIcon },
       { name: "Announcement Bar", url: "/announce-bar", icon: OrderIcon },
       {
@@ -56,6 +54,11 @@ const Layout = ({ children }: DashboardLayoutProps) => {
       };
     });
   }, [location.pathname]);
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+
   const activeNavItem = navItems.find((item) => item.active);
   return (
     <div className="flex h-screen bg-gray-50">
