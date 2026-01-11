@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import useDebounce from "../../hooks/debounce";
-import { BASE_URL } from "../../config";
 import {
   Badge,
   Icon,
@@ -14,10 +11,13 @@ import {
   type TabProps,
 } from "@shopify/polaris";
 import { Link } from "react-router";
-import { ClipboardIcon } from "@shopify/polaris-icons";
 import { handleIdCopy, truncate } from "../../utils";
+import { useEffect, useState } from "react";
+import useDebounce from "../../hooks/debounce";
+import { BASE_URL } from "../../config";
+import { ClipboardIcon } from "@shopify/polaris-icons";
 
-const AnnounceBar = () => {
+const TimerForProduct = () => {
   const [data, setSubscribers] = useState<any[]>([]);
   const [pagination, setPagination] = useState<any>({});
   const [loading, setLoading] = useState<boolean>(true);
@@ -55,7 +55,7 @@ const AnnounceBar = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `${BASE_URL}/admin/announce-bar?page=${page}&limit=50&filter=${filters}&searchTerm=${searchTerm}`
+      `${BASE_URL}/admin/timer-for-product?page=${page}&limit=50&filter=${filters}&searchTerm=${searchTerm}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -77,16 +77,7 @@ const AnnounceBar = () => {
   }, [filters, searchTerm]);
 
   const rowMarkup = data?.map((item, index) => {
-    const {
-      id,
-      name,
-      announceBarType,
-      barPosition,
-      status,
-      Store,
-      Campaign,
-      createdAt,
-    } = item;
+    const { id, name, theme, status, Store, Campaign, createdAt } = item;
     return (
       <IndexTable.Row
         id={id}
@@ -121,18 +112,9 @@ const AnnounceBar = () => {
             </Text>
           </Link>
         </IndexTable.Cell>
+
         <IndexTable.Cell className="capitalize">
-          {announceBarType
-            .replaceAll("_", " ")
-            .replace(/\bANNOUNCEMENTS?\b/g, "")
-            .replace(/\s{2,}/g, " ")
-            .toLocaleLowerCase()}
-        </IndexTable.Cell>
-        <IndexTable.Cell>
-          {barPosition
-            .replaceAll("_", " ")
-            .replace("PAGE", "")
-            .toLocaleLowerCase()}
+          {theme.replaceAll("_", " ").toLocaleLowerCase()}
         </IndexTable.Cell>
         <IndexTable.Cell>{Campaign?.name ?? "Not Connected"}</IndexTable.Cell>
         <IndexTable.Cell className="capitalize">
@@ -188,11 +170,9 @@ const AnnounceBar = () => {
           headings={[
             { title: "Name" },
             { title: "Store Name" },
-            { title: "Type" },
-            { title: "Placement" },
+            { title: "Theme" },
             { title: "Connect Campaigns" },
             { title: "Status" },
-
             { title: "Created At" },
           ]}
           pagination={{
@@ -225,4 +205,4 @@ const AnnounceBar = () => {
   );
 };
 
-export default AnnounceBar;
+export default TimerForProduct;

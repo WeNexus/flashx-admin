@@ -11,6 +11,7 @@ import Integrations from "./components/integrations";
 import ReviewLogs from "./components/review-log";
 import AnnounceBar from "./components/announcebar";
 import Subscriptions from "./components/subscriptions";
+import TimerForProduct from "./components/timer-for-product";
 
 export const router = createHashRouter([
   {},
@@ -48,8 +49,18 @@ export const router = createHashRouter([
       </Layout>
     ),
   },
+
+  {
+    path: "timer-for-products",
+    element: (
+      <Layout>
+        <TimerForProduct />
+      </Layout>
+    ),
+  },
   {
     path: "stores/:storeId",
+
     element: (
       <Layout>
         <Store />
