@@ -17,6 +17,7 @@ const AppControlCard = ({
     setReFetch: (value: any) => void;
 }) => {
     const [devLoading, setDevLoading] = useState(false);
+    const [reviewLoading, setReviewLoading] = useState(false);
     const [suspendLoading, setSuspendLoading] = useState(false);
     const [sessionDeleteLoading, setSessionDeleteLoading] = useState(false);
     const [productHideLoading, setProductHideLoading] = useState(false);
@@ -41,6 +42,11 @@ console.log("dfgdf", store)
     const [localDevelopment, setLocalDevelopment] = useState<boolean>(
         !!store?.development
     );
+
+    const [reviewed, setReviewed] = useState<boolean>(store?.appReview ?? false);
+
+    console.log("reviewed", reviewed, "app", store.appReview)
+
     const [suspendReasonDisplay, setSuspendReasonDisplay] = useState(
         store?.suspendReason ?? ""
     );
@@ -60,12 +66,15 @@ console.log("dfgdf", store)
         setLocalAppStatus(store?.appStatus);
         setLocalDevelopment(!!store?.development);
         setSuspendReasonDisplay(store?.suspendReason ?? "");
+        debugger
+        setReviewed(store?.reviewed ?? false);
     }, [
         store?.id,
         store?.appStatus,
         store?.development,
         store,
         store?.suspendReason,
+        store?.reviewed,
     ]);
 
     const callAdminAppControl = async (
@@ -129,6 +138,28 @@ console.log("dfgdf", store)
             }
         });
     };
+
+    const handleReviewToggle = () => {
+
+        if (!store) return;
+
+        const nextReview = !reviewed;
+
+        callAdminAppControl(
+            {
+                type: "setReviewed",
+                storeId: store.id,
+                appReview: nextReview,
+            },
+            setReviewLoading
+        ).then((ok) => {
+            if (ok) {
+                setReviewed(nextReview); // update UI immediately
+            }
+        });
+    };
+
+
 
     // SUSPEND SWITCH CLICK
     const handleSuspendToggle = () => {
@@ -350,6 +381,17 @@ console.log("dfgdf", store)
                     </Button>
                 </div>
 
+                {/* Review */}
+                <div className="flex justify-between mt-2">
+                    <span className="text-lg">Review</span>
+                    {store && (
+                        <SwitchWithLoading
+                            switchOn={reviewed}
+                            handleSwitch={handleReviewToggle}
+                            isLoading={reviewLoading}
+                        />
+                    )}
+                </div>
                 {/* Optional product-hide UI */}
                 <div className="my-2">
                     <Collapsible
