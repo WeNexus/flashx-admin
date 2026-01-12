@@ -66,15 +66,14 @@ console.log("dfgdf", store)
         setLocalAppStatus(store?.appStatus);
         setLocalDevelopment(!!store?.development);
         setSuspendReasonDisplay(store?.suspendReason ?? "");
-        debugger
-        setReviewed(store?.reviewed ?? false);
+        setReviewed(store?.appReview ?? false);
     }, [
         store?.id,
         store?.appStatus,
         store?.development,
         store,
         store?.suspendReason,
-        store?.reviewed,
+        store?.appReview,
     ]);
 
     const callAdminAppControl = async (
@@ -104,6 +103,7 @@ console.log("dfgdf", store)
             const data = await res.json();
 
             if (data.ok || data.success) {
+
                 // let parent optionally refetch
                 setReFetch((prev: boolean) => !prev);
                 return true;
