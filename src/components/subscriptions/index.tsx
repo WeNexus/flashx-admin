@@ -162,7 +162,7 @@ export default function SubscriptionsRoute() {
           {/*</Text>*/}
           <Badge tone={plan.isActive ? 'success' : 'warning'}>
             {`${plan.handle} • ${formatMoneyCents(plan.priceCents)} •
-            ${plan.interval}`}
+            ${sub.billingType}`}
           </Badge>
         </InlineStack>
       ) : (

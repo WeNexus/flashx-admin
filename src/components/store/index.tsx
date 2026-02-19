@@ -92,7 +92,7 @@ const Store = () => {
                     <Button
                         icon={ArrowLeftIcon}
                         onClick={() =>
-                            (location.href = "/flashx-logs/#/stores/")
+                            (location.href = "/flashx-admin/#/stores/")
                         }
                     ></Button>{" "}
                     <span className="text-2xl font-bold">

@@ -23,6 +23,7 @@ export interface StoreSubscription {
   shopifySubscriptionGid: string | null;
   currentPeriodStartAt: string | null;
   currentPeriodEndAt: string | null;
+  billingType: string | null;
   updatedAt: string;
   plan: Plan;
 }
