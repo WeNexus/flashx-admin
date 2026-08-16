@@ -9,7 +9,7 @@ import {
   OrderIcon,
   PackageIcon,
   SettingsIcon,
-  StoreIcon,
+  // StoreIcon,
   ReceiptIcon,
 } from "@shopify/polaris-icons";
 import Sidebar from "./sidebar";
@@ -29,9 +29,7 @@ const Layout = ({ children }: DashboardLayoutProps) => {
       { name: "Dashboard", url: "/", icon: ChartVerticalFilledIcon },
       { name: "Stores", url: "/stores", icon: PackageIcon },
       { name: "Subscriptions", url: "/subscriptions", icon: ReceiptIcon },
-      { name: "Campaigns", url: "/campaigns", icon: OrderIcon },
-      { name: "Announcement Bar", url: "/announce-bar", icon: OrderIcon },
-      { name: "Subscribers", url: "/subscribers", icon: StoreIcon },
+      // { name: "Subscribers", url: "/subscribers", icon: StoreIcon },
       { name: "Campaigns", url: "/campaigns", icon: DiscountIcon },
       {
         name: "Announcement Bar",
@@ -49,7 +47,7 @@ const Layout = ({ children }: DashboardLayoutProps) => {
         icon: SettingsIcon,
         // hasDropdown: true,
       },
-      { name: "Integrations", url: "/integrations", icon: OrderIcon },
+      // { name: "Integrations", url: "/integrations", icon: OrderIcon },
       {
         name: "Activity Log",
         url: "/activity-logs",

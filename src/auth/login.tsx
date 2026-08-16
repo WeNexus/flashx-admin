@@ -27,11 +27,11 @@ const Login = () => {
       setLoading(false);
       return setError("Please enter a valid email address.");
     }
-    if (email != "jahangir@wenexus.io") {
+    if (email != "admin@wenexus.io") {
       setLoading(false);
       return setError("Email not found.");
     }
-    if (password != "12345678") {
+    if (password != "flashx-admin") {
       setLoading(false);
       return setError("Incorrect password.");
     }
